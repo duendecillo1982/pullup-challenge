@@ -3,6 +3,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyCOeEhI5JSfWRKecQrrLtPGrElTMbR41mY",
   authDomain: "pull-up-challenge.firebaseapp.com",
+  databaseURL: "https://pull-up-challenge-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "pull-up-challenge",
   storageBucket: "pull-up-challenge.firebasestorage.app",
   messagingSenderId: "695125025201",
@@ -129,3 +130,4 @@ db.ref('deelnemers').on('value', (snapshot) => {
   updateLeaderboard(data);
 
 });
+
