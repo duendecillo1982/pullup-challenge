@@ -1,0 +1,93 @@
+Perfect, Steven! Hieronder geef ik je een **werkende GitHub Action** die:
+
+1. **Detecteert** wanneer je `instructions.md` aanpast.
+2. **Stuurt die instructies naar Perplexity via hun API**.
+3. **Slaat de gegenereerde code op** in je repo (optioneel: in `generated_code.txt` of direct in je bestaande bestanden).
+4. **Commit en pusht** de wijzigingen automatisch.
+
+---
+
+## ⚙️ Stap 1: Voeg `instructions.md` toe aan je repo
+
+Plaats hierin je instructies, bijvoorbeeld:
+
+```md
+Voeg een blauwe knop toe rechtsboven op de homepage die naar de contactpagina leidt.
+```
+
+---
+
+## ⚙️ Stap 2: Voeg deze GitHub Action toe
+
+Plaats dit bestand in `.github/workflows/perplexity-update.yml`:
+
+```yaml
+name: Apply Instructions via Perplexity
+
+on:
+  push:
+    paths:
+      - instructions.md
+
+jobs:
+  generate-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Read instructions
+        id: read_instructions
+        run: |
+          echo "INSTRUCTIONS<<EOF" >> $GITHUB_ENV
+          cat instructions.md >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Call Perplexity API
+        id: call_perplexity
+        run: |
+          curl -X POST https://api.perplexity.ai/v1/chat/completions \
+            -H "Authorization: Bearer ${{ secrets.PERPLEXITY_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "pplx-7b-chat",
+              "messages": [
+                {"role": "system", "content": "Je bent een ontwikkelaar die wijzigingen aanbrengt in een eenvoudige webapp met index.html, app.js en style.css."},
+                {"role": "user", "content": "'"${{ env.INSTRUCTIONS }}"'"}
+              ]
+            }' > response.json
+
+      - name: Extract and save generated code
+        run: |
+          # Dit is een placeholder. Je kunt hier JSON parsen en de gegenereerde code opslaan in bestanden.
+          cat response.json > generated_code.txt
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "AI Bot"
+          git config --global user.email "ai@bot.com"
+          git add generated_code.txt
+          git commit -m "Applied instructions from instructions.md via Perplexity"
+          git push
+```
+
+---
+
+## 🔐 Stap 3: Voeg je Perplexity API-key toe aan GitHub
+
+1. Ga naar je repo op GitHub.
+2. Ga naar **Settings > Secrets and variables > Actions**.
+3. Voeg een secret toe met naam `PERPLEXITY_API_KEY` en plak je API-key.
+
+---
+
+## 🧪 Testen
+
+- Voeg een instructie toe aan `instructions.md`.
+- Commit en push.
+- De Action zal automatisch draaien en `generated_code.txt` aanmaken met de output van Perplexity.
+
+---
+
+Wil je dat ik help met het aanpassen van de Action zodat de gegenereerde code direct in `index.html`, `app.js` of `style.css` terechtkomt? Of wil je eerst testen met `generated_code.txt`?
