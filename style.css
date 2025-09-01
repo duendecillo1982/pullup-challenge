@@ -1,0 +1,213 @@
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-bg: #fefefe;
+  --color-primary: #1f8ef1;
+  --color-primary-dark: #1662bc;
+  --color-gold: #ffd700;
+  --color-silver: #c0c0c0;
+  --color-bronze: #cd7f32;
+  --color-text: #213547;
+  --color-muted: #6c757d;
+  --color-error: #d9534f;
+  --color-success: #5cb85c;
+
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  font-family: var(--font-family);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 540px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.card {
+  background-color: var(--color-white);
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 8px rgba(33, 53, 71, 0.07);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.card__body {
+  margin: 0;
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(31, 142, 241, 0.25);
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  width: 100%;
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.message {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  min-height: 1.2rem;
+}
+
+.leaderboard-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+#stats {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.leaderboard-entry {
+  display: grid;
+  grid-template-columns: 2.5rem auto 8rem 5rem;
+  align-items: center;
+  background-color: var(--color-white);
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 5px rgba(33, 53, 71, 0.05);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.leaderboard-entry:hover {
+  background-color: rgba(31, 142, 241, 0.07);
+}
+
+.rank {
+  font-weight: 700;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.name {
+  overflow-wrap: anywhere;
+}
+
+.total {
+  text-align: right;
+  color: var(--color-primary-dark);
+}
+
+.sets {
+  text-align: right;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Kleurcodering voor top 3 */
+.rank-gold {
+  border-left: 5px solid var(--color-gold);
+  background-color: #fff8dc;
+}
+
+.rank-silver {
+  border-left: 5px solid var(--color-silver);
+  background-color: #f8f9fa;
+}
+
+.rank-bronze {
+  border-left: 5px solid var(--color-bronze);
+  background-color: #fff4e5;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 1rem;
+    max-width: 100%;
+  }
+
+  .leaderboard-entry {
+    grid-template-columns: 2rem 1fr auto auto;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
