@@ -1,13 +1,13 @@
 // Vervang deze config door die van jouw Firebase project
 // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyCOeEhI5JSfWRKecQrrLtPGrElTMbR41mY",
-    authDomain: "pull-up-challenge.firebaseapp.com",
-    projectId: "pull-up-challenge",
-    storageBucket: "pull-up-challenge.firebasestorage.app",
-    messagingSenderId: "695125025201",
-    appId: "1:695125025201:web:3403500f63488e94175d90"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyCOeEhI5JSfWRKecQrrLtPGrElTMbR41mY",
+  authDomain: "pull-up-challenge.firebaseapp.com",
+  projectId: "pull-up-challenge",
+  storageBucket: "pull-up-challenge.firebasestorage.app",
+  messagingSenderId: "695125025201",
+  appId: "1:695125025201:web:3403500f63488e94175d90"
+};
 
 // Firebase initialisatie
 firebase.initializeApp(firebaseConfig);
@@ -127,4 +127,5 @@ function showMessage(text, isError) {
 db.ref('deelnemers').on('value', (snapshot) => {
   const data = snapshot.val();
   updateLeaderboard(data);
+
 });
