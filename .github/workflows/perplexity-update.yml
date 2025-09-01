@@ -1,0 +1,48 @@
+name: Apply Instructions via Perplexity
+
+on:
+  push:
+    paths:
+      - instructions.md
+
+jobs:
+  generate-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Read instructions
+        id: read_instructions
+        run: |
+          echo "INSTRUCTIONS<<EOF" >> $GITHUB_ENV
+          cat instructions.md >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Call Perplexity API
+        id: call_perplexity
+        run: |
+          curl -X POST https://api.perplexity.ai/v1/chat/completions \
+            -H "Authorization: Bearer ${{ secrets.PERPLEXITY_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "pplx-7b-chat",
+              "messages": [
+                {"role": "system", "content": "Je bent een ontwikkelaar die wijzigingen aanbrengt in een eenvoudige webapp met index.html, app.js en style.css."},
+                {"role": "user", "content": "'"${{ env.INSTRUCTIONS }}"'"}
+              ]
+            }' > response.json
+
+      - name: Extract and save generated code
+        run: |
+          # Dit is een placeholder. Je kunt hier JSON parsen en de gegenereerde code opslaan in bestanden.
+          cat response.json > generated_code.txt
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "AI Bot"
+          git config --global user.email "ai@bot.com"
+          git add generated_code.txt
+          git commit -m "Applied instructions from instructions.md via Perplexity"
+          git push
