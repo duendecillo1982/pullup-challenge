@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team Pull-up Challenge</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🏋️‍♂️ Team Pull-up Challenge</h1>
+      <p class="subtitle">Voer je pull-ups in en zie waar je staat!</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <div class="card">
+          <div class="card__body">
+            <h2>Voeg je set toe</h2>
+            <form id="pullUpForm" class="pull-up-form">
+              <div class="form-group">
+                <label for="nameInput" class="form-label">Naam</label>
+                <input type="text" id="nameInput" class="form-control" placeholder="Voer je naam in" required />
+              </div>
+              <div class="form-group">
+                <label for="pullUpsInput" class="form-label">Aantal pull-ups in deze set</label>
+                <input type="number" id="pullUpsInput" class="form-control" min="1" placeholder="Bijv. 10" required />
+              </div>
+              <button type="submit" class="btn btn--primary btn--full-width">Set toevoegen</button>
+            </form>
+            <p id="message" class="message"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="leaderboard-section">
+        <h2>Leaderboard</h2>
+        <p id="stats"></p>
+        <div id="leaderboard" class="leaderboard"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
