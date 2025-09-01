@@ -14,6 +14,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
+db.ref('/').once('value').then(snapshot => {
+  console.log('Firebase DB snapshot:', snapshot.val());
+}).catch(err => {
+  console.error('Firebase error:', err);
+});
+
 // Elementen ophalen
 const form = document.getElementById('pullUpForm');
 const nameInput = document.getElementById('nameInput');
@@ -130,4 +136,5 @@ db.ref('deelnemers').on('value', (snapshot) => {
   updateLeaderboard(data);
 
 });
+
 
