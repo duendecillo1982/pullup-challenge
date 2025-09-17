@@ -1,1 +1,1 @@
-Voeg onderaan een rood vierkant toe zodat ik zie dat het werkt.
+Voeg onderaan een rood vierkant toe als test zodat ik zie dat het werkt.
